@@ -8,10 +8,10 @@ Famicom expansion port to ESP32-S3, through a level shifter (Famicom 5V = HV, ES
 
 ```
                                 ┌──────────────────────────────┐
-                       3.3 V ───┤ LV                         HV ├── 5V  (exp pin 2)
-                        GND ────┤ GND                        GND ├── GND (exp pin 1)
+                       3.3 V ───┤ LV                        HV ├── 5V  (exp pin 15)
+                        GND ────┤ GND                      GND ├── GND (exp pin 1)
                                 │                              │
-  ESP32-S3                      │     8-channel level shifter  │                  Famicom expansion
+  ESP32-S3                      │         level shifter        │                  Famicom expansion
   GPIO4 ◄───────────────────────┤ B0 ◄► A0                     ├─◄ pin 12   OUT0     strobe (latch)
   GPIO8 ◄───────────────────────┤ B1 ◄► A1                     ├─◄ pin 14   /OE j1   $4016 read, shift clock
   GPIO9 ────────────────────────┤ B2 ◄► A2                     ├─► pin 13   j1 /D1   $4016 bit 1, pad data
