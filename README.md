@@ -4,7 +4,7 @@ ESP32-S3 firmware: a USB HID gamepad on the native USB (OTG) port acts as joypad
 
 ## Pinout
 
-Famicom expansion port to ESP32-S3, through a level shifter (Famicom 5V = HV, ESP32-S3 3.3V = LV). Only the pins one player needs:
+Famicom expansion port to ESP32-S3, through a level shifter (Famicom 5V = HV, ESP32-S3 3.3V = LV). 
 
 | Exp pin | Signal | Dir | ESP32-S3 | Use |
 |---|---|---|---|---|
@@ -16,7 +16,7 @@ Famicom expansion port to ESP32-S3, through a level shifter (Famicom 5V = HV, ES
 
 ## USB OTG power
 
-The gamepad plugs into the ESP32-S3's native **USB** port (through a USB-C OTG adapter if needed); keep the **UART/COM** port for flashing and the serial log. Host mode needs 5V on VBUS, which ESP32-S3-DevKitC-1 boards (and their two-USB-C clones) don't supply by default. Bridge both solder jumpers on the back of the board with solder:
+The gamepad plugs into the ESP32-S3's native **USB** port, keep the **UART/COM** port for flashing and the serial log. Host mode needs 5V on VBUS, which ESP32-S3-DevKitC-1 boards (and their two-USB-C clones) don't supply by default. Bridge both solder jumpers on the back of the board with solder:
 
 - **USB-OTG**
 - **IN-OUT**
