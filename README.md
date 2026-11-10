@@ -1,8 +1,6 @@
 # Famicom USB controller
 
-ESP32-S3 firmware: a USB HID gamepad on the native USB (OTG) port acts as joypad 1 on the Famicom expansion port. Pressed buttons are logged to the serial console (115200), e.g. `[pad] 81: RIGHT A`.
-
-Wiring: see Pinout below (`include/pins.h`).
+ESP32-S3 firmware: a USB HID gamepad on the native USB (OTG) port acts as joypad 1 on the Famicom expansion port. 
 
 ## Pinout
 
@@ -14,10 +12,6 @@ Famicom expansion port to ESP32-S3, through a level shifter (Famicom 5V = HV, ES
 | 12 | OUT0 | Fam -> ESP | GPIO4 | strobe (latch buttons) |
 | 14 | /OE joypad 1 | Fam -> ESP | GPIO8 | `$4016` read, shift clock (active low) |
 | 13 | joypad 1 /D1 | ESP -> Fam | GPIO9 | `$4016` bit 1, pad data (low = pressed) |
-
-// Famiterm modifications will only disable keyboard functionality:
-// Move gray D3 from famicom exp  pin 5 to 14 and on esp32-s3 GPIO16 to GPIO8
-// Move puple D2 from famicom exp  pin 6 to 13 and on esp32-s3 GPIO15 to GPIO9
 
 
 ## USB OTG power
