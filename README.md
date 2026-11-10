@@ -4,11 +4,24 @@ ESP32-S3 firmware: a USB HID gamepad on the native USB (OTG) port acts as joypad
 
 ## Pinout
 
-Famicom expansion port to ESP32-S3, through a level shifter (Famicom 5V = HV, ESP32-S3 3.3V = LV). 
+Famicom expansion port to ESP32-S3, through a level shifter (Famicom 5V = HV, ESP32-S3 3.3V = LV).
+
+```
+                                ┌──────────────────────────────┐
+                       3.3 V ───┤ LV                         HV ├── 5V  (exp pin 2)
+                        GND ────┤ GND                        GND ├── GND (exp pin 1)
+                                │                              │
+  ESP32-S3                      │     8-channel level shifter  │                  Famicom expansion
+  GPIO4 ◄───────────────────────┤ B0 ◄► A0                     ├─◄ pin 12   OUT0     strobe (latch)
+  GPIO8 ◄───────────────────────┤ B1 ◄► A1                     ├─◄ pin 14   /OE j1   $4016 read, shift clock
+  GPIO9 ────────────────────────┤ B2 ◄► A2                     ├─► pin 13   j1 /D1   $4016 bit 1, pad data
+                                └──────────────────────────────┘
+```
+
+Arrowheads show signal direction as used (Fam -> ESP for OUT0 and /OE1, ESP -> Fam for /D1); 3 of the 8 shifter channels are used.
 
 | Exp pin | Signal | Dir | ESP32-S3 | Use |
 |---|---|---|---|---|
-| 1 | GND | | GND | |
 | 12 | OUT0 | Fam -> ESP | GPIO4 | strobe (latch buttons) |
 | 14 | /OE joypad 1 | Fam -> ESP | GPIO8 | `$4016` read, shift clock (active low) |
 | 13 | joypad 1 /D1 | ESP -> Fam | GPIO9 | `$4016` bit 1, pad data (low = pressed) |
